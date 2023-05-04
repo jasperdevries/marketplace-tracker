@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('backup:run')->daily()->at('01:30');
+        $schedule->command('items:get-prices')->everyThreeHours();
     }
 
     /**
