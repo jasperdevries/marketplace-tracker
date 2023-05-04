@@ -9,7 +9,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-    name: '',
+    steam_id: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -33,20 +33,6 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div class="mt-4">
                 <InputLabel for="email" value="Email" />
                 <TextInput
                     id="email"
@@ -54,9 +40,22 @@ const submit = () => {
                     type="email"
                     class="mt-1 block w-full"
                     required
+                    autofocus
                     autocomplete="username"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="name" value="Steam id" />
+                <TextInput
+                    id="name"
+                    v-model="form.steam_id"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="steam_id"
+                />
+                <InputError class="mt-2" :message="form.errors.steam_id" />
             </div>
 
             <div class="mt-4">
