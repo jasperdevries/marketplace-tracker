@@ -15,8 +15,14 @@ nfs_mount_enabled: false
 mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
 nodejs_version: "18"
+web_environment:
+  - VITE_APP_URL=${DDEV_HOSTNAME}
+hooks:
+  pre-start:
+    - exec-host: '[ ! -f ".ddev/.env" ] && sh .ddev/viteserve/build-dotenv.sh || echo ".ddev/.env found"'
+  post-start:
+    - exec: .ddev/commands/web/vite-serve
 
 # Key features of ddev's config.yaml:
 
