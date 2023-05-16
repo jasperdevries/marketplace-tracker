@@ -10,10 +10,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use function array_key_exists;
 use function filter_var;
 use function str_replace;
 use const FILTER_FLAG_ALLOW_FRACTION;
 use const FILTER_SANITIZE_NUMBER_FLOAT;
+use const FILTER_SANITIZE_NUMBER_INT;
 
 class GetItemPrice implements ShouldQueue
 {
@@ -41,7 +43,8 @@ class GetItemPrice implements ShouldQueue
         $itemPrice->median = isset($prices['median_price']) ?
             filter_var(str_replace(',', '.', $prices['median_price']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) :
             ($lastItem?->median ?? 0);
-        $itemPrice->volume = $prices['volume'] ?? 0;
+        $itemPrice->volume = array_key_exists('volume', $prices) ?
+            filter_var(str_replace(',', '.', $prices['volume']), FILTER_SANITIZE_NUMBER_INT) : 0;
         $itemPrice->save();
     }
 }
