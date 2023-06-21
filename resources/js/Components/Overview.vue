@@ -20,7 +20,7 @@
                 <Link class="float-right mt-2 ml-4 rounded-md border border-transparent px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition bg-transparant border-secondary text-secondary hover:border-secondary-600 hover:text-secondary-600 focus:outline-none disabled:opacity-25"
                               v-if="createRoute"
                               :href="createRoute">
-                    {{ createButtonLabel ?? 'Nieuwe maken' }}
+                    {{ createButtonLabel ?? 'Create new' }}
                 </Link>
             </div>
         </div>
