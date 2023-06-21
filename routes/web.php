@@ -33,5 +33,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::resource('items', \App\Http\Controllers\ItemsController::class)->only(['index', 'create', 'store']);
+    Route::resource('items', \App\Http\Controllers\ItemsController::class)
+        ->middleware('can:create-items')
+        ->only(['index', 'create', 'store']);
 });
