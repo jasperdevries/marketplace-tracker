@@ -1,7 +1,6 @@
 <script setup>
 import TextInput from "./TextInput.vue";
 import {ref} from "vue";
-import {watchDebounced} from "@vueuse/core";
 import {ChevronDoubleRightIcon} from "@heroicons/vue/24/solid";
 import {
     Chart as ChartJS,
@@ -30,15 +29,15 @@ const searchResults = ref(null);
 const selectedItem = ref(null);
 const graphData = ref(null);
 
-const search = async (value) => {
+const search = async () => {
     graphData.value = null;
     selectedItem.value = null;
-    if (value.length < 3) {
+    if (searchValue.value.length < 3) {
         searchResults.value = null;
         return;
     }
 
-    const {data} = await axios.get(route('item-graph.search-items', {search: value}));
+    const {data} = await axios.get(route('item-graph.search-items', {search: searchValue.value}));
 
     searchResults.value = data;
 };
@@ -59,14 +58,13 @@ const reset = () => {
     graphData.value = null;
 };
 
-watchDebounced(searchValue, search, {debounce: 1000});
-
 </script>
 
 <template>
     <div class="w-full">
-        <div class="px-4 py-3">
-            <TextInput v-model="searchValue" class="h-10 w-full px-4" placeholder="min. 3 characters"/>
+        <div class="px-4 py-3 grid grid-cols-12">
+            <TextInput v-model="searchValue" class="h-10 col-span-10 px-4" placeholder="min. 3 characters" @keydown.enter.prevent="search" />
+            <button @click="search" class="col-span-2">Search</button>
         </div>
         <hr>
         <div class="px-4 py-3">
