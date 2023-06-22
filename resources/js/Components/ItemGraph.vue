@@ -31,6 +31,7 @@ const selectedItem = ref(null);
 const graphData = ref(null);
 
 const search = async (value) => {
+    graphData.value = null;
     selectedItem.value = null;
     if (value.length < 3) {
         searchResults.value = null;
@@ -55,6 +56,7 @@ const reset = () => {
     searchValue.value = null;
     searchResults.value = null;
     selectedItem.value = null;
+    graphData.value = null;
 };
 
 watchDebounced(searchValue, search, {debounce: 1000});
