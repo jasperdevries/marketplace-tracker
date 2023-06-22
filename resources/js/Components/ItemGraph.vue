@@ -31,6 +31,7 @@ const selectedItem = ref(null);
 const graphData = ref(null);
 
 const search = async (value) => {
+    selectedItem.value = null;
     if (value.length < 3) {
         searchResults.value = null;
         return;

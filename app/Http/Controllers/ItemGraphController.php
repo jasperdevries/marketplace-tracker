@@ -48,18 +48,18 @@ class ItemGraphController extends Controller
                     }, $data),
                 ],
                 [
-                    'label' => 'Max price',
+                    'label'           => 'Max price',
                     'backgroundColor' => '#503166',
                     'borderColor'     => '#503166',
-                    'data'  => array_map(function ($item) {
+                    'data'            => array_map(function ($item) {
                         return $item['max'];
                     }, $data),
                 ],
                 [
-                    'label' => 'Avg price',
+                    'label'           => 'Avg price',
                     'backgroundColor' => '#665031',
                     'borderColor'     => '#665031',
-                    'data'  => array_map(function ($item) {
+                    'data'            => array_map(function ($item) {
                         return $item['avg'];
                     }, $data),
                 ],
