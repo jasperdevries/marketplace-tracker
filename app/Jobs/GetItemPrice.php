@@ -32,7 +32,7 @@ class GetItemPrice implements ShouldQueue
      */
     public function handle(SteamApiService $service): void
     {
-        $prices = $service->getPrice($this->item);
+        $prices = $service->getPrice($this->item->market_hash_name);
         $lastItem = $this->item->prices()->latest()->first();
 
         $itemPrice = new ItemPrice();

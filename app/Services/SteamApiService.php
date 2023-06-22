@@ -22,12 +22,12 @@ class SteamApiService
      * @throws RequestException
      * @throws Throwable
      */
-    public function getPrice(Item $item): array
+    public function getPrice(string $marketHashName): array
     {
         $response = Http::get($this->baseUrl . '/market/priceoverview', [
-            'appid' => 730,
-            'currency' => 3, // EUR
-            'market_hash_name' => $item->market_hash_name,
+            'appid'            => 730,
+            'currency'         => 3, // EUR
+            'market_hash_name' => $marketHashName,
         ])->throw();
 
         throw_if(!$response->json('success'));
