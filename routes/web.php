@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemGraphController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +25,17 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::name('item-graph.')
+    ->prefix('item-graph')
+    ->group(function () {
+        Route::get('/items/search')
+            ->uses([ItemGraphController::class, 'searchItems'])
+            ->name('search-items');
+        Route::get('/{item}/data')
+            ->uses([ItemGraphController::class, 'getData'])
+            ->name('data');
+    });
 
 Route::middleware([
     'auth:sanctum',
