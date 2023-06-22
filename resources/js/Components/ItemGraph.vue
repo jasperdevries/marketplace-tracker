@@ -79,7 +79,7 @@ watchDebounced(searchValue, search, {debounce: 1000});
                 </div>
 
 
-                <Line :data="graphData" />
+                <Line :data="graphData" v-if="graphData" />
 
 
             </div>
