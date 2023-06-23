@@ -38,7 +38,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth.user' => fn () => $request->user()
-                ? $request->user()->only('id', 'name', 'email', 'avatar', 'function', 'language')
+                ? $request->user()->only('id', 'steam_id', 'email')
                 : null,
         ]);
     }
