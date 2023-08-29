@@ -53,7 +53,7 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('items.index')" :active="route().current('items.*')">
+                                <NavLink :href="route('items.index')" :active="route().current('items.*')" v-if="page.props.auth.user.is_super_user">
                                     Items
                                 </NavLink>
                                 <NavLink :href="route('inventory.index')" :active="route().current('inventory.*')" v-if="page.props.has_steam_id">
