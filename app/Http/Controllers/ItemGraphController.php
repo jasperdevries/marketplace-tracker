@@ -30,31 +30,13 @@ class ItemGraphController extends Controller
         }
         $data = array_map(function ($prices) {
             return [
-                'min' => min($prices),
-                'max' => max($prices),
-                'avg' => array_sum($prices) / count($prices),
+                'avg' => round(array_sum($prices) / count($prices), 2)
             ];
         }, $data);
 
         return [
             'labels'   => array_keys($data),
             'datasets' => [
-                [
-                    'label'           => 'Min price',
-                    'backgroundColor' => '#316650',
-                    'borderColor'     => '#316650',
-                    'data'            => array_map(function ($item) {
-                        return $item['min'];
-                    }, $data),
-                ],
-                [
-                    'label'           => 'Max price',
-                    'backgroundColor' => '#503166',
-                    'borderColor'     => '#503166',
-                    'data'            => array_map(function ($item) {
-                        return $item['max'];
-                    }, $data),
-                ],
                 [
                     'label'           => 'Avg price',
                     'backgroundColor' => '#665031',
