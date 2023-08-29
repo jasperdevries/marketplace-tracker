@@ -47,4 +47,8 @@ Route::middleware([
     Route::resource('items', \App\Http\Controllers\ItemsController::class)
         ->middleware('can:create-items')
         ->only(['index', 'create', 'store']);
+
+    Route::resource('inventory', \App\Http\Controllers\InventoryController::class)
+        ->middleware('can:search-inventory')
+        ->only(['index', 'store']);
 });

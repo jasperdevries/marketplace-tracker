@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -11,6 +11,8 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 defineProps({
     title: String,
 });
+
+const page = usePage();
 
 const showingNavigationDropdown = ref(false);
 
@@ -53,6 +55,9 @@ const logout = () => {
                                 </NavLink>
                                 <NavLink :href="route('items.index')" :active="route().current('items.*')">
                                     Items
+                                </NavLink>
+                                <NavLink :href="route('inventory.index')" :active="route().current('inventory.*')" v-if="page.props.has_steam_id">
+                                    Inventory
                                 </NavLink>
                             </div>
                         </div>

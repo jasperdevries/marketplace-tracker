@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
             'auth.user' => fn () => $request->user()
                 ? $request->user()->only('id', 'steam_id', 'email')
                 : null,
+            'has_steam_id' => fn () => $request->user() && !is_null($request->user()->steam_id),
         ]);
     }
 }

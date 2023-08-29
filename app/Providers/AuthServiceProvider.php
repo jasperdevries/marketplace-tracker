@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use function is_null;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('search-inventory', fn(User $user) => !is_null($user->steam_id));
         Gate::define('create-items', fn(User $user) => $user->is_super_user);
     }
 }
