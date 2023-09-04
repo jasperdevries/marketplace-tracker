@@ -28,7 +28,8 @@ class GetItemPrices extends Command
      */
     public function handle()
     {
+        $dispatchTime = now();
         $items = Item::all();
-        $items->each(fn(Item $item) => dispatch(new GetItemPrice($item)));
+        $items->each(fn(Item $item) => GetItemPrice::dispatch($item)->delay($dispatchTime->addSeconds(10)));
     }
 }
