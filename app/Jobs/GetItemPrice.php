@@ -38,10 +38,10 @@ class GetItemPrice implements ShouldQueue
         $itemPrice = new ItemPrice();
         $itemPrice->item()->associate($this->item);
         $itemPrice->low = isset($prices['lowest_price']) ?
-            filter_var(str_replace(',', '.', $prices['lowest_price']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) :
+            filter_var(str_replace([',', '-'], ['.', '0'], $prices['lowest_price']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) :
             ($lastItem?->low ?? 0);
         $itemPrice->median = isset($prices['median_price']) ?
-            filter_var(str_replace(',', '.', $prices['median_price']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) :
+            filter_var(str_replace([',', '-'], ['.', '0'], $prices['median_price']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) :
             ($lastItem?->median ?? 0);
         $itemPrice->volume = array_key_exists('volume', $prices) ?
             filter_var(str_replace(',', '.', $prices['volume']), FILTER_SANITIZE_NUMBER_INT) : 0;
